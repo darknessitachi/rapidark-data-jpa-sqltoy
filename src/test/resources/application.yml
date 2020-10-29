@@ -1,0 +1,47 @@
+#spring.datasource.url = jdbc:mysql://localhost:3306/zhanglfdatabase
+#spring.datasource.username = root
+#spring.datasource.password = 
+#spring.datasource.driverClassName = com.mysql.jdbc.Driver
+#数据库支持多种连接模式和连接设置，不同的连接模式和连接设置是通过不同的URL来区分的，URL中的设置是不区分大小写。内存数据库（私有）
+#jdbc:h2:mem:
+#内存数据库（被命名）
+#jdbc:h2:mem:<databaseName>
+#jdbc:h2:mem:test_mem
+spring:
+   datasource:
+      url: jdbc:h2:mem:soa_service_api
+      username:  root
+      password:  root
+      driverClassName:  org.h2.Driver
+      #进行该配置后，每次启动程序，程序都会运行resources/schema.sql文件，对数据库的结构进行操作，相当于新建一个表。
+      schema: classpath:schema.sql
+      #进行该配置后，每次启动程序，程序都会运行resources/data.sql文件，对数据库的数据操作，相当于往表中插入数据。
+      data: classpath:data.sql
+
+   # 数据库类型声明
+   jpa:
+      database: H2
+      # 是否开启查询语句在控制台打印
+      show-sql: true
+      # Hibernate ddl auto (create, create-drop, update)，这里的设置为update很重要，不然初始化时就一张空表，data.sql的数据进不去。
+      hibernate:
+         ddl-auto: update
+      # Naming strategy
+      #spring.jpa.hibernate.naming-strategy = org.hibernate.cfg.ImprovedNamingStrategy
+   #开启h2控制台功能和访问地址。
+   h2:
+      console:
+         enabled: true
+         path: /h2-console
+   sqltoy:
+      # 这里要注意，指定sql文件的目录(是目录不是具体文件或文件匹配表达式),多个可以用逗号分隔，会自动向下寻找
+      sqlResourcesDir: classpath:/com/rapidark/soa
+      # 缓存翻译的配置
+      #translateConfig: classpath:sqltoy-translate.xml
+      # debug模式会打印执行sql
+      debug: true
+      # 提供统一字段:createBy createTime updateBy updateTime 等字段补漏性(为空时)赋值(可选配置)
+      #unifyFieldsHandler: com.sqltoy.plugins.SqlToyUnifyFieldsHandler
+      # sql执行超过多长时间则进行日志输出,用于监控哪些慢sql(可选配置:默认30秒)
+      printSqlTimeoutMillis: 3000000
+      

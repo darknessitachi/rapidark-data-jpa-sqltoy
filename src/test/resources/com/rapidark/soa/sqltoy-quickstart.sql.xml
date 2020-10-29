@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sqltoy xmlns="http://www.sagframe.com/schema/sqltoy"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.sagframe.com/schema/sqltoy http://www.sagframe.com/schema/sqltoy/sqltoy.xsd">
+    <!-- 第一个演示sql -->
+    <sql id="qstart_query_staffInfo">
+        <value>
+            <![CDATA[
+            select * from staff t 
+            where #[t.name like :name]
+                  #[and t.age >= :age]
+            ]]>
+        </value>
+    </sql>
+</sqltoy>
