@@ -50,6 +50,7 @@ public class TemplateQueryLookupStrategy implements QueryLookupStrategy {
                                         NamedQueries namedQueries) {
         if (method.getAnnotation(SqlToyQuery.class) != null) {
         	return new SqlToyTemplateQuery(sqlToyLazyDao,
+        			method,
             		new DefaultJpaQueryMethodFactory(extractor).build(method, metadata, factory), entityManager);
         } else {
         	return jpaQueryLookupStrategy.resolveQuery(method, metadata, factory, namedQueries);

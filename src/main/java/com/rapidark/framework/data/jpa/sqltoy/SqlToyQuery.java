@@ -18,5 +18,6 @@ import org.springframework.data.annotation.QueryAnnotation;
 @QueryAnnotation
 @Documented
 public @interface SqlToyQuery {
+	
 	String value() default "";
 }

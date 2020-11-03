@@ -29,7 +29,7 @@ import com.rapidark.soa.entity.StaffEntity;
  */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = SqlToyApplication.class)
-public class SqlToyQueryDemoTest {
+public class SqlToyQueryTest {
 	/**
 	 * sqltoy 默认提供统一的lazyDao,正常情况下开发者无需自己写dao层
 	 */

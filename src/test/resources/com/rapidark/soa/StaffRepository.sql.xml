@@ -23,4 +23,14 @@
         </value>
     </sql>
     
+    <sql id="StaffRepository_queryPageMapByNameAndAge">
+        <value>
+            <![CDATA[
+            select * from staff t 
+            where #[t.name like :name]
+                  #[and t.age >= :age]
+            ]]>
+        </value>
+    </sql>
+    
 </sqltoy>
