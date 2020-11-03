@@ -1,14 +1,18 @@
 package com.rapidark.framework.data.jpa.sqltoy;
 
 import java.util.Arrays;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 
 import org.sagacity.sqltoy.dao.SqlToyLazyDao;
 import org.sagacity.sqltoy.model.PaginationModel;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.query.JpaParameters;
+import org.springframework.data.jpa.repository.query.JpaParameters.JpaParameter;
 import org.springframework.data.jpa.repository.query.JpaQueryMethod;
-import org.springframework.data.repository.query.QueryMethod;
 import org.springframework.data.repository.query.RepositoryQuery;
 
 import com.alibaba.fastjson.JSON;
@@ -37,9 +41,39 @@ public class SqlToyTemplateQuery implements RepositoryQuery {
 	}
 
 	@Override
-	public Object execute(Object[] parameters) {
-		System.out.println(Arrays.toString(parameters));
-//		PaginationModel pageModel = new PaginationModel();
+	public Object execute(Object[] values) {
+		System.out.println(Arrays.toString(values));
+		JpaParameters parameters = getQueryMethod().getParameters();
+		Map<String, Object> paramsMap = new HashMap<String, Object>();
+		paramsMap.put("name", "张");
+		paramsMap.put("age", 25);
+		
+		int 
+		for (JpaParameter jpaParameter : parameters) {
+			Class<?> paramType = jpaParameter.getType();
+			if (paramType == Pageable.class) {
+				continue;
+			}
+			paramsMap.put(jpaParameter.getName().get(), value)
+		}
+		if (parameters.hasPageableParameter()) {
+            Pageable pageable = (Pageable) (values[parameters.getPageableIndex()]);
+            if (pageable != null) {
+//                query.setFirstResult((int) pageable.getOffset());
+//                query.setMaxResults(pageable.getPageSize());
+            	PaginationModel pageModel = new PaginationModel();
+        		pageModel.setPageNo(1);
+        		pageModel.setPageSize(1);
+        		
+        		
+        		PaginationModel<HashMap> staffInfo = sqlToyLazyDao.findPageBySql(pageModel, "ds_Staff_queryStaffInfo", paramsMap, HashMap.class);
+        		System.out.println(JSON.toJSONString(staffInfo));
+            }
+        } else {
+        	List<Map<String, Object>> staffInfo = sqlToyLazyDao.findBySql("ds_Staff_queryStaffInfo", paramsMap, HashMap.class);
+        	return staffInfo;
+        }
+		//		PaginationModel pageModel = new PaginationModel();
 ////		StaffInfoVO staffVO = new StaffInfoVO();
 //		// 作为查询条件传参数
 ////		staffVO.setStaffName("陈");
@@ -55,7 +89,7 @@ public class SqlToyTemplateQuery implements RepositoryQuery {
 	}
 
 	@Override
-	public QueryMethod getQueryMethod() {
+	public JpaQueryMethod getQueryMethod() {
 		return queryMethod;
 	}
 

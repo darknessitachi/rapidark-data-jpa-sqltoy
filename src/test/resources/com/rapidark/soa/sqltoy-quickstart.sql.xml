@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.sagframe.com/schema/sqltoy http://www.sagframe.com/schema/sqltoy/sqltoy.xsd">
     <!-- 第一个演示sql -->
-    <sql id="qstart_query_staffInfo">
+    <sql id="ds_Staff_queryStaffInfo">
         <value>
             <![CDATA[
             select * from staff t 
@@ -12,4 +12,15 @@
             ]]>
         </value>
     </sql>
+    
+    <sql id="queryByNameAndAge">
+        <value>
+            <![CDATA[
+            select * from staff t 
+            where #[t.name like :name]
+                  #[and t.age >= :age]
+            ]]>
+        </value>
+    </sql>
+    
 </sqltoy>

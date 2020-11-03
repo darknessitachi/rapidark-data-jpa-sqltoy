@@ -20,7 +20,7 @@ import com.rapidark.soa.repository.StaffRepository;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SqlToyApplication.class)
-public class SpringbootH2ApplicationTests {
+public class JpaSqlToyQueryTest {
 
 	@Autowired
 	private StaffRepository repository;

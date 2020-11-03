@@ -29,7 +29,7 @@ import com.rapidark.soa.entity.StaffEntity;
  */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = SqlToyApplication.class)
-public class QueryDemoTest {
+public class SqlToyQueryDemoTest {
 	/**
 	 * sqltoy 默认提供统一的lazyDao,正常情况下开发者无需自己写dao层
 	 */
@@ -41,7 +41,7 @@ public class QueryDemoTest {
 		String[] paramNames = { "name", "age" };
 		Object[] paramValue = { "张", 25 };
 		// 最后一个参数是返回类型 null 则返回普通数组(可以传VO对象、Map.class)
-		List<StaffEntity> staffInfo = sqlToyLazyDao.findBySql("qstart_query_staffInfo", paramNames, paramValue, StaffEntity.class);
+		List<StaffEntity> staffInfo = sqlToyLazyDao.findBySql("ds_Staff_queryStaffInfo", paramNames, paramValue, StaffEntity.class);
 //		System.out.println(JSON.toJSONString(staffInfo));
 	}
 	
@@ -57,8 +57,7 @@ public class QueryDemoTest {
 		paramsMap.put("name", "张");
 		paramsMap.put("age", 25);
 		
-		Map<String, Object> dataMap = new HashMap<String, Object>();
-		PaginationModel<HashMap> staffInfo = sqlToyLazyDao.findPageBySql(pageModel, "qstart_query_staffInfo", paramsMap, HashMap.class);
+		PaginationModel<HashMap> staffInfo = sqlToyLazyDao.findPageBySql(pageModel, "ds_Staff_queryStaffInfo", paramsMap, HashMap.class);
 		System.out.println(JSON.toJSONString(staffInfo));
 	}
 	
