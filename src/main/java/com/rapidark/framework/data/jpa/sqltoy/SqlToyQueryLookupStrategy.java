@@ -22,16 +22,16 @@ import org.springframework.data.repository.query.RepositoryQuery;
  * @date 2020年10月25日 下午1:46:19
  * @version V1.0
  */
-public class TemplateQueryLookupStrategy implements QueryLookupStrategy {
+public class SqlToyQueryLookupStrategy implements QueryLookupStrategy {
 
-	private SqlToyLazyDao sqlToyLazyDao;
-    private final EntityManager entityManager;
+	protected SqlToyLazyDao sqlToyLazyDao;
+	protected final EntityManager entityManager;
 
-    private QueryLookupStrategy jpaQueryLookupStrategy;
+	protected QueryLookupStrategy jpaQueryLookupStrategy;
 
-    private QueryExtractor extractor;
+	protected QueryExtractor extractor;
 
-    public TemplateQueryLookupStrategy(SqlToyLazyDao sqlToyLazyDao, EntityManager entityManager, Key key, QueryExtractor extractor,
+    public SqlToyQueryLookupStrategy(SqlToyLazyDao sqlToyLazyDao, EntityManager entityManager, Key key, QueryExtractor extractor,
     		QueryMethodEvaluationContextProvider evaluationContextProvider) {
     	this.sqlToyLazyDao = sqlToyLazyDao;
         this.jpaQueryLookupStrategy = JpaQueryLookupStrategy.create(
@@ -42,7 +42,7 @@ public class TemplateQueryLookupStrategy implements QueryLookupStrategy {
 
     public static QueryLookupStrategy create(SqlToyLazyDao sqlToyLazyDao, EntityManager entityManager, Key key, QueryExtractor extractor,
     		QueryMethodEvaluationContextProvider evaluationContextProvider) {
-        return new TemplateQueryLookupStrategy(sqlToyLazyDao, entityManager, key, extractor, evaluationContextProvider);
+        return new SqlToyQueryLookupStrategy(sqlToyLazyDao, entityManager, key, extractor, evaluationContextProvider);
     }
 
     @Override

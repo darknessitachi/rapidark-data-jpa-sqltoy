@@ -18,10 +18,10 @@ import org.springframework.lang.Nullable;
  */
 public class SqlToyRepositoryFactory extends JpaRepositoryFactory {
 
-	private SqlToyLazyDao sqlToyLazyDao;
-	private final EntityManager entityManager;
+	protected SqlToyLazyDao sqlToyLazyDao;
+	protected final EntityManager entityManager;
 
-    private final PersistenceProvider extractor;
+	protected final PersistenceProvider extractor;
 
 	public SqlToyRepositoryFactory(SqlToyLazyDao sqlToyLazyDao, EntityManager entityManager) {
 		super(entityManager);
@@ -34,7 +34,7 @@ public class SqlToyRepositoryFactory extends JpaRepositoryFactory {
     protected Optional<QueryLookupStrategy> getQueryLookupStrategy(@Nullable QueryLookupStrategy.Key key,
     		QueryMethodEvaluationContextProvider evaluationContextProvider) {
         return Optional.of(
-        		TemplateQueryLookupStrategy.create(sqlToyLazyDao,
+        		SqlToyQueryLookupStrategy.create(sqlToyLazyDao,
         				entityManager, key, extractor, evaluationContextProvider));
     }
 	
